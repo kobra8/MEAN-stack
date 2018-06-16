@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { Post } from "./post.mode";
 import { Subject } from "rxjs";
 
-@Injectable({providedIn: 'root'}) // Ten wpis można dodac zamiast wpisywać serwis w app module -> tworzy 1 instancję dl acałej apki
+@Injectable({providedIn: 'root'}) // Ten wpis można dodac zamiast wpisywać serwis w app module -> tworzy jedną instancję dla acałej apki
 export class PostsService {
   private posts: Post[] = []; //Pusta tablica Posts
   private postUpdated = new Subject<Post[]>();
