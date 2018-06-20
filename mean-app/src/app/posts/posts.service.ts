@@ -28,8 +28,16 @@ export class PostsService {
 
   addPost(title: string, content: string) {
     const post: Post = {id: null, title: title, content: content};
-    this.posts.push(post); // Dodanie posta do tablicy
-    this.postsUpdated.next([...this.posts]); // Przekazanie do Subject uaktualnionej tabeli posts
-    // [...this.posts] -> Create new array -> kopia zamiast referencji
+    this.httpClient.post< {message: string }>('http://localhost:3000/api/posts', post)
+    .subscribe(
+      (res)=> {
+       console.log(res.message); 
+       // Zostawiono lokalną tablicę posts, która uaktualnia się jeżeli response success
+       this.posts.push(post); // Dodanie posta do tablicy
+       this.postsUpdated.next([...this.posts]); // Przekazanie do Subject uaktualnionej tabeli posts
+       // [...this.posts] -> Create new array -> kopia zamiast referencji
+      },
+      error => {}
+    )
   }
 }
